@@ -1,0 +1,92 @@
+/* ================================================
+   VARIABLES & GLOBAL STYLES
+   YPC International College — Official Brand Palette
+   Primary:   #000751 · #000B7F · #0063EB · #00C2FA
+   Secondary: #FFC700 · #FAEF00
+   Fonts:     Montserrat · Open Sans · Roboto Mono
+   ================================================ */
+
+:root {
+  /* ── Backgrounds ── */
+  --navy:          #000751;    /* YPC darkest navy              */
+  --navy2:         #000B7F;    /* YPC deep blue                 */
+
+  /* ── Primary accent (sky blue) ── */
+  --cyan:          #00C2FA;    /* YPC primary 4 — main accent   */
+  --cyan-light:    #7FE0FC;    /* 50% tint of #00C2FA           */
+
+  /* ── Blue range ── */
+  --blue:          #0063EB;    /* YPC primary 3 — medium blue   */
+  --blue-bright:   #00C2FA;    /* sky blue alias                */
+
+  /* ── Secondary (gold / yellow) ── */
+  --gold:          #FFC700;    /* YPC secondary 1               */
+  --gold-light:    #FAEF00;    /* YPC secondary 2               */
+
+  /* ── Neutrals ── */
+  --white:         #f0f6ff;
+  --gray:          #7a8baa;
+  --gray-light:    #b8c8e0;
+
+  /* ── Cards (dark navy-blue surfaces) ── */
+  --card:          #030f72;    /* card surface                  */
+  --card2:         #0a1a8a;    /* elevated / hover              */
+
+  /* ── Status colours ── */
+  --green:         #06d6a0;
+  --red:           #ef476f;
+  --purple:        #000B7F;    /* repurposed as deep YPC blue   */
+
+  /* ── Radii ── */
+  --radius:        18px;
+  --radius-sm:     10px;
+}
+
+/* ── Reset ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-x: hidden;
+}
+
+.phone-wrap {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  background: var(--navy);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Screens ── */
+.screen {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+  animation: fadeIn .3s ease;
+}
+.screen.active { display: flex; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Scrollbar hide ── */
+.dash-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+.dash-scroll::-webkit-scrollbar,
+#profile::-webkit-scrollbar { display: none; }

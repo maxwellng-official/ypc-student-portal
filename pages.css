@@ -1,0 +1,340 @@
+/* ================================================
+   PAGE-SPECIFIC STYLES
+   Palette:  #000751 · #000B7F · #0063EB · #00C2FA · #FFC700 · #FAEF00
+   Fonts:    Montserrat (headings) · Open Sans (body) · Roboto Mono (mono)
+   ================================================ */
+
+
+/* ── LOGIN ── */
+#login {
+  background: linear-gradient(160deg, #000b7f 0%, #000751 60%, #00030f 100%);
+  justify-content: center;
+  align-items: center;
+  padding: 40px 28px;
+  position: relative;
+}
+.login-bg-circle { position: absolute; border-radius: 50%; }
+.login-bg-circle.c1 { width: 300px; height: 300px; top: -80px; right: -80px; background: radial-gradient(circle, rgba(0,11,127,.5) 0%, transparent 70%); }
+.login-bg-circle.c2 { width: 200px; height: 200px; bottom: 60px; left: -60px; background: radial-gradient(circle, rgba(0,194,250,.15) 0%, transparent 70%); }
+
+.login-logo { text-align: center; margin-bottom: 40px; }
+.logo-badge {
+  width: 72px; height: 72px;
+  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 14px;
+  font-size: 22px; font-weight: 800;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  box-shadow: 0 8px 32px rgba(0,99,235,.5);
+}
+.login-logo h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; font-family: 'Montserrat', sans-serif; }
+.login-logo p  { font-size: 12px; color: var(--cyan-light); margin-top: 3px; letter-spacing: 1.5px; text-transform: uppercase; }
+
+.login-card {
+  background: var(--card);
+  border-radius: 24px; padding: 28px 24px;
+  width: 100%; max-width: 360px;
+  border: 1px solid rgba(255,255,255,.07);
+  box-shadow: 0 24px 64px rgba(0,0,0,.5);
+}
+.login-card h2 { font-size: 20px; font-weight: 700; margin-bottom: 6px; font-family: 'Montserrat', sans-serif; }
+.login-card p  { font-size: 13px; color: var(--gray); margin-bottom: 28px; }
+.input-group { margin-bottom: 16px; }
+.input-group label { font-size: 12px; color: var(--gray-light); font-weight: 600; letter-spacing: .5px; display: block; margin-bottom: 7px; }
+.input-group input {
+  width: 100%; background: var(--navy2);
+  border: 1.5px solid rgba(255,255,255,.1);
+  border-radius: var(--radius-sm);
+  padding: 13px 16px; color: var(--white);
+  font-size: 14px; font-family: 'Open Sans', sans-serif;
+  outline: none; transition: border-color .2s;
+}
+.input-group input:focus { border-color: var(--cyan); }
+.input-group input::placeholder { color: var(--gray); }
+
+
+/* ── DASHBOARD ── */
+.greeting-section { padding: 4px 20px 20px; }
+.greeting-section .sub  { font-size: 12px; color: var(--cyan); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+.greeting-section h1    { font-size: 24px; font-weight: 700; line-height: 1.2; font-family: 'Montserrat', sans-serif; }
+.greeting-section .date { font-size: 12px; color: var(--gray); margin-top: 4px; }
+
+/* ID Card — YPC Blue gradient */
+.id-card {
+  margin: 0 20px 20px;
+  background: linear-gradient(135deg, #000B7F 0%, #0063EB 55%, #0099cc 100%);
+  border-radius: 20px; padding: 20px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,99,235,.4);
+}
+.id-card::before { content: ''; position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,.07); }
+.id-card::after  { content: ''; position: absolute; bottom: -20px; right: 30px; width: 80px; height: 80px; border-radius: 50%; background: rgba(0,194,250,.15); }
+.id-card-top { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.avatar { width: 48px; height: 48px; border-radius: 14px; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; font-family: 'Montserrat', sans-serif; flex-shrink: 0; border: 2px solid rgba(255,255,255,.3); }
+.id-info .name { font-size: 15px; font-weight: 700; font-family: 'Montserrat', sans-serif; }
+.id-info .id   { font-size: 11px; color: var(--cyan-light); font-family: 'Roboto Mono', monospace; margin-top: 2px; }
+.id-info .prog { font-size: 11px; color: rgba(255,255,255,.7); margin-top: 2px; }
+.id-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.id-stat { text-align: center; }
+.id-stat .val  { font-size: 18px; font-weight: 700; font-family: 'Montserrat', sans-serif; }
+.id-stat .lbl  { font-size: 10px; color: rgba(255,255,255,.65); margin-top: 2px; }
+.id-stat .val.good { color: var(--gold-light); }
+.id-stat .val.ok   { color: #7FE0FC; }
+
+.quick-actions { padding: 0 20px 20px; display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+.qa-item { display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; }
+.qa-icon { width: 52px; height: 52px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 22px; transition: transform .15s; }
+.qa-icon:active { transform: scale(.9); }
+.qa-item span { font-size: 10px; color: var(--gray-light); text-align: center; font-weight: 600; line-height: 1.3; }
+
+.schedule-strip { padding: 0 20px 20px; display: flex; flex-direction: column; gap: 10px; }
+.sched-card { background: var(--card); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; border: 1px solid rgba(255,255,255,.06); }
+.sched-time { font-family: 'Roboto Mono', monospace; font-size: 11px; color: var(--gray); min-width: 52px; }
+.sched-dot  { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.sched-info .subj { font-size: 13px; font-weight: 600; }
+.sched-info .loc  { font-size: 11px; color: var(--gray); margin-top: 2px; }
+.sched-badge { font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
+
+.announcements { padding: 0 20px 20px; display: flex; flex-direction: column; gap: 10px; }
+.ann-card { background: var(--card); border-radius: 14px; padding: 14px 16px; border: 1px solid rgba(255,255,255,.06); cursor: pointer; transition: background .2s; }
+.ann-card:active { background: var(--card2); }
+.ann-card .ann-tag   { font-size: 10px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--cyan); margin-bottom: 5px; }
+.ann-card .ann-title { font-size: 13px; font-weight: 600; line-height: 1.4; }
+.ann-card .ann-meta  { font-size: 11px; color: var(--gray); margin-top: 5px; }
+
+
+/* ── ATTENDANCE ── */
+.attend-summary { margin: 0 20px 20px; background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid rgba(255,255,255,.06); }
+.attend-summary h3 { font-size: 13px; color: var(--gray); margin-bottom: 16px; }
+.attend-ring-row   { display: flex; align-items: center; gap: 20px; }
+.ring-wrap { position: relative; width: 90px; height: 90px; flex-shrink: 0; }
+.ring-wrap svg { transform: rotate(-90deg); }
+.ring-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.ring-center .pct { font-size: 20px; font-weight: 700; font-family: 'Montserrat', sans-serif; }
+.ring-center .lbl { font-size: 9px; color: var(--gray); }
+.att-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,.05); }
+.att-row:last-child { border: none; }
+.att-row .ar-lbl { font-size: 12px; color: var(--gray); }
+.att-row .ar-val { font-size: 12px; font-weight: 600; }
+.subject-attend { padding: 0 20px; display: flex; flex-direction: column; gap: 10px; }
+.sa-card { background: var(--card); border-radius: 14px; padding: 14px 16px; border: 1px solid rgba(255,255,255,.06); }
+.sa-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+.sa-top .sa-subj { font-size: 13px; font-weight: 600; }
+.sa-top .sa-pct  { font-size: 14px; font-weight: 700; font-family: 'Montserrat', sans-serif; }
+.sa-bar  { height: 6px; background: rgba(255,255,255,.08); border-radius: 10px; overflow: hidden; }
+.sa-fill { height: 100%; border-radius: 10px; transition: width .8s ease; }
+.sa-foot { display: flex; justify-content: space-between; margin-top: 8px; }
+.sa-foot span { font-size: 10px; color: var(--gray); }
+
+
+/* ── RESULTS ── */
+.gpa-card {
+  margin: 0 20px 20px;
+  background: linear-gradient(135deg, #000751 0%, #000B7F 100%);
+  border-radius: 20px; padding: 22px; text-align: center;
+  border: 1px solid rgba(0,99,235,.4);
+  box-shadow: 0 12px 40px rgba(0,99,235,.25);
+}
+.gpa-card .gpa-lbl { font-size: 11px; color: #7FE0FC; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+.gpa-card .gpa-val { font-size: 52px; font-weight: 800; color: #ffffff; line-height: 1; font-family: 'Montserrat', sans-serif; }
+.gpa-card .gpa-sub { font-size: 13px; color: var(--cyan); margin-top: 6px; }
+.gpa-card .gpa-sem { font-size: 11px; color: rgba(0,194,250,.6); margin-top: 4px; }
+.result-list { padding: 0 20px; display: flex; flex-direction: column; gap: 10px; }
+.res-card { background: var(--card); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; border: 1px solid rgba(255,255,255,.06); }
+.grade-badge { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; font-family: 'Montserrat', sans-serif; flex-shrink: 0; }
+.res-info .res-subj { font-size: 13px; font-weight: 600; }
+.res-info .res-code { font-size: 11px; color: var(--gray); margin-top: 2px; font-family: 'Roboto Mono', monospace; }
+.res-score { text-align: right; margin-left: auto; }
+.res-score .score   { font-size: 18px; font-weight: 700; font-family: 'Montserrat', sans-serif; }
+.res-score .credits { font-size: 11px; color: var(--gray); margin-top: 2px; }
+
+
+/* ── SCHEDULE ── */
+.day-tabs { display: flex; gap: 8px; padding: 0 20px 16px; overflow-x: auto; }
+.day-tabs::-webkit-scrollbar { display: none; }
+.day-tab { flex-shrink: 0; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all .2s; background: var(--card); color: var(--gray); border: 1.5px solid rgba(255,255,255,.06); font-family: 'Montserrat', sans-serif; }
+.day-tab.active { background: var(--cyan); color: var(--navy); border-color: var(--cyan); }
+.full-schedule { padding: 0 20px; display: flex; flex-direction: column; gap: 12px; }
+.fs-card { background: var(--card); border-radius: 16px; padding: 16px; border: 1px solid rgba(255,255,255,.06); display: flex; gap: 14px; }
+.fs-time-col { min-width: 50px; }
+.fs-time-col .fst { font-family: 'Roboto Mono', monospace; font-size: 11px; color: var(--gray); line-height: 1.5; }
+.fs-line { width: 2px; border-radius: 2px; }
+.fs-body .fs-subj { font-size: 14px; font-weight: 700; font-family: 'Montserrat', sans-serif; margin-bottom: 4px; }
+.fs-body .fs-lec  { font-size: 12px; color: var(--gray); }
+.fs-body .fs-room { font-size: 11px; color: var(--cyan); margin-top: 4px; }
+.fs-type { align-self: flex-start; margin-left: auto; font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 20px; font-family: 'Montserrat', sans-serif; }
+.no-class { text-align: center; padding: 40px 20px; color: var(--gray); font-size: 13px; }
+
+
+/* ── PROFILE — Digital ID Card (YPC Blue) ── */
+#profile { overflow-y: auto; }
+
+.digital-id-card {
+  margin: 0 20px 16px;
+  background: linear-gradient(135deg, #000B7F 0%, #0063EB 55%, #0088cc 100%);
+  border-radius: 20px; overflow: hidden; position: relative;
+  border: 1px solid rgba(0,194,250,.3);
+  box-shadow: 0 16px 48px rgba(0,99,235,.4);
+}
+.digital-id-card::before { content: ''; position: absolute; top: -40px; right: -40px; width: 140px; height: 140px; border-radius: 50%; background: rgba(255,255,255,.06); }
+.digital-id-card::after  { content: ''; position: absolute; bottom: -30px; left: 30px; width: 100px; height: 100px; border-radius: 50%; background: rgba(0,194,250,.1); }
+
+.dic-header { padding: 14px 16px 10px; border-bottom: 1px solid rgba(255,255,255,.1); display: flex; align-items: center; gap: 10px; position: relative; z-index: 1; }
+.dic-college-badge { width: 34px; height: 34px; background: rgba(255,255,255,.2); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; font-family: 'Montserrat', sans-serif; border: 1px solid rgba(255,255,255,.25); flex-shrink: 0; }
+.dic-college-name { font-size: 12px; font-weight: 700; font-family: 'Montserrat', sans-serif; color: rgba(255,255,255,.95); line-height: 1.2; }
+.dic-card-type    { font-size: 9px; color: rgba(255,255,255,.55); letter-spacing: 1px; text-transform: uppercase; margin-top: 1px; }
+.dic-body { padding: 16px; display: flex; gap: 16px; align-items: flex-start; position: relative; z-index: 1; }
+.dic-avatar { width: 64px; height: 80px; background: rgba(255,255,255,.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; font-family: 'Montserrat', sans-serif; border: 2px solid rgba(255,255,255,.25); flex-shrink: 0; }
+.dic-details { flex: 1; min-width: 0; }
+.dic-name { font-size: 15px; font-weight: 700; font-family: 'Montserrat', sans-serif; margin-bottom: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dic-id-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+.dic-id-label { font-size: 9px; font-weight: 700; color: rgba(255,255,255,.55); letter-spacing: 1px; text-transform: uppercase; min-width: 52px; flex-shrink: 0; }
+.dic-id-value { font-family: 'Roboto Mono', monospace; font-size: 12px; font-weight: 500; color: #7FE0FC; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dic-footer { padding: 10px 16px 14px; border-top: 1px solid rgba(255,255,255,.08); position: relative; z-index: 1; }
+.dic-programme { font-size: 11px; color: rgba(255,255,255,.8); margin-bottom: 3px; }
+.dic-semester  { font-size: 10px; color: rgba(255,255,255,.45); font-family: 'Roboto Mono', monospace; }
+
+/* Account Status Banner */
+.acct-status-banner { margin: 0 20px 16px; background: var(--card); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; cursor: pointer; border: 1px solid rgba(255,255,255,.06); transition: background .2s; }
+.acct-status-banner:active { background: var(--card2); }
+.acct-status-icon  { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.acct-status-info  { flex: 1; }
+.acct-status-label { font-size: 11px; color: var(--gray); }
+.acct-status-value { font-size: 14px; font-weight: 700; font-family: 'Montserrat', sans-serif; margin-top: 2px; }
+
+/* Info cards */
+.info-section { padding: 0 20px 16px; }
+.info-card { background: var(--card); border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,.06); margin-bottom: 16px; }
+.info-card-head { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,.06); font-size: 12px; font-weight: 700; font-family: 'Montserrat', sans-serif; color: var(--cyan); letter-spacing: .5px; text-transform: uppercase; display: flex; align-items: center; justify-content: space-between; }
+
+.admin-only-badge { font-size: 10px; font-weight: 600; color: var(--gray); letter-spacing: 0; text-transform: none; background: rgba(255,255,255,.06); border-radius: 6px; padding: 3px 8px; font-family: 'Open Sans', sans-serif; }
+
+.edit-info-btn { background: rgba(0,194,250,.12); border: 1px solid rgba(0,194,250,.3); border-radius: 8px; color: var(--cyan); font-size: 11px; font-weight: 700; font-family: 'Montserrat', sans-serif; padding: 4px 12px; cursor: pointer; transition: background .2s; text-transform: none; letter-spacing: 0; }
+.edit-info-btn:active { background: rgba(0,194,250,.25); }
+
+.info-row { display: flex; align-items: center; padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,.04); gap: 12px; }
+.info-row:last-child { border: none; }
+.info-row .ir-icon  { font-size: 16px; width: 20px; text-align: center; }
+.info-row .ir-lbl   { font-size: 11px; color: var(--gray); flex: 1; }
+.info-row .ir-val   { font-size: 12px; font-weight: 600; text-align: right; }
+.info-row .ir-right { display: flex; align-items: center; gap: 6px; }
+.editable-val { font-size: 12px; font-weight: 600; text-align: right; color: var(--white); }
+.lock-icon { font-size: 11px; opacity: 0.4; flex-shrink: 0; }
+
+/* Menu */
+.menu-list { padding: 0 20px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.menu-item { background: var(--card); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; cursor: pointer; border: 1px solid rgba(255,255,255,.06); transition: background .2s; }
+.menu-item:active { background: var(--card2); }
+.menu-icon  { width: 38px; height: 38px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+.menu-label { flex: 1; font-size: 13px; font-weight: 600; }
+.menu-arrow { color: var(--gray); font-size: 14px; }
+
+.logout-btn { margin: 0 20px 20px; padding: 14px; background: rgba(239,71,111,.12); border: 1.5px solid rgba(239,71,111,.3); border-radius: 14px; color: var(--red); font-size: 14px; font-weight: 700; font-family: 'Montserrat', sans-serif; cursor: pointer; width: calc(100% - 40px); transition: background .2s; }
+.logout-btn:active { background: rgba(239,71,111,.2); }
+
+
+/* ── EXAM SLIP ── */
+.slip-intro { margin: 0 20px 16px; background: rgba(0,194,250,.06); border: 1px solid rgba(0,194,250,.2); border-radius: 14px; padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; font-size: 12px; color: var(--gray-light); line-height: 1.5; }
+.slip-intro span { font-size: 20px; flex-shrink: 0; }
+.exam-slip-list { padding: 0 20px; display: flex; flex-direction: column; gap: 20px; }
+.slip-card { background: var(--card); border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,.06); }
+.slip-card-header { padding: 16px 16px 12px; border-bottom: 1px solid rgba(255,255,255,.06); display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.slip-subject { font-size: 15px; font-weight: 700; font-family: 'Montserrat', sans-serif; }
+.slip-code    { font-size: 11px; color: var(--cyan); font-family: 'Roboto Mono', monospace; margin-top: 3px; }
+.slip-meta { padding: 12px 16px; display: flex; flex-direction: column; gap: 7px; }
+.slip-meta-row { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--gray-light); }
+.slip-meta-row strong { color: var(--white); }
+.qr-wrapper { background: #fff; border-radius: 12px; margin: 4px 16px 0; padding: 14px; display: flex; align-items: center; justify-content: center; }
+.qr-wrapper canvas, .qr-wrapper img { display: block; max-width: 100%; height: auto; }
+.qr-id-strip { margin: 10px 16px 0; background: rgba(255,255,255,.04); border-radius: 10px; padding: 10px 14px; display: flex; flex-direction: column; gap: 4px; }
+.qr-id-row { display: flex; align-items: center; gap: 8px; font-size: 11px; }
+.qr-id-label { color: var(--gray); min-width: 52px; }
+.qr-id-value { font-family: 'Roboto Mono', monospace; color: var(--cyan-light); font-weight: 500; }
+.qr-instructions { padding: 10px 16px 14px; font-size: 11px; color: var(--gray); text-align: center; line-height: 1.5; }
+.slip-scanned { margin: 0 16px 14px; background: rgba(6,214,160,.08); border: 1px solid rgba(6,214,160,.2); border-radius: 10px; padding: 10px 14px; font-size: 12px; color: var(--green); display: flex; align-items: center; gap: 8px; }
+.slip-loading { text-align: center; padding: 40px 20px; color: var(--gray); font-size: 13px; }
+
+
+/* ── PAYMENT ── */
+.payment-overview { margin: 0 20px 20px; background: var(--card); border-radius: 20px; padding: 24px 20px; border: 1px solid rgba(255,255,255,.06); text-align: center; position: relative; overflow: hidden; }
+.payment-overview::before { content: ''; position: absolute; top: -40px; right: -40px; width: 120px; height: 120px; border-radius: 50%; background: rgba(6,214,160,.05); }
+.po-status-text { font-size: 11px; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+.po-amount { font-size: 38px; font-weight: 800; font-family: 'Montserrat', sans-serif; margin-bottom: 10px; line-height: 1; }
+.po-amount.good { color: var(--green); }
+.po-amount.bad  { color: var(--red); }
+.payment-list { padding: 0 20px; display: flex; flex-direction: column; gap: 10px; }
+.pay-card { background: var(--card); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; border: 1px solid rgba(255,255,255,.06); }
+.pay-icon  { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; background: rgba(255,255,255,.05); flex-shrink: 0; }
+.pay-info  { flex: 1; min-width: 0; }
+.pay-desc  { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pay-date  { font-size: 11px; color: var(--gray); margin-top: 2px; }
+.pay-right { text-align: right; flex-shrink: 0; }
+.pay-amount{ font-size: 13px; font-weight: 700; font-family: 'Montserrat', sans-serif; margin-bottom: 4px; }
+.pay-ref   { font-size: 10px; color: var(--gray); font-family: 'Roboto Mono', monospace; margin-top: 3px; }
+
+
+/* ── EXTRACURRICULAR ── */
+.extra-stats-row { margin: 0 20px 20px; background: var(--card); border-radius: 16px; padding: 18px 20px; display: flex; align-items: center; justify-content: space-around; border: 1px solid rgba(255,255,255,.06); }
+.extra-stat { text-align: center; }
+.extra-stat-val { font-size: 28px; font-weight: 800; font-family: 'Montserrat', sans-serif; color: var(--cyan); }
+.extra-stat-lbl { font-size: 10px; color: var(--gray); margin-top: 3px; font-weight: 600; }
+.extra-stat-divider { width: 1px; height: 40px; background: rgba(255,255,255,.08); }
+.activity-list { padding: 0 20px; display: flex; flex-direction: column; gap: 10px; }
+.activity-card { background: var(--card); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; border: 1px solid rgba(255,255,255,.06); }
+.activity-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.activity-info { flex: 1; }
+.activity-name   { font-size: 13px; font-weight: 700; font-family: 'Montserrat', sans-serif; }
+.activity-role   { font-size: 11px; color: var(--cyan); margin-top: 2px; font-weight: 600; }
+.activity-period { font-size: 11px; color: var(--gray); margin-top: 2px; }
+
+
+/* ── DOCUMENT CHECKLIST ── */
+.doc-progress-card { margin: 0 20px 20px; background: var(--card); border-radius: 16px; padding: 18px 20px; border: 1px solid rgba(255,255,255,.06); }
+.doc-progress-label { font-size: 12px; color: var(--gray); margin-bottom: 10px; font-weight: 600; }
+.doc-progress-bar-wrap { height: 8px; background: rgba(255,255,255,.08); border-radius: 10px; overflow: hidden; margin-bottom: 10px; }
+.doc-progress-bar { height: 100%; border-radius: 10px; background: linear-gradient(90deg, var(--blue), var(--cyan)); transition: width .8s ease; }
+.doc-progress-count { font-size: 12px; color: var(--gray-light); }
+.doc-progress-count span { font-weight: 700; font-family: 'Montserrat', sans-serif; color: var(--white); }
+.doc-list { padding: 0 20px; display: flex; flex-direction: column; gap: 10px; }
+.doc-item { background: var(--card); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; border: 1px solid rgba(255,255,255,.06); }
+.doc-status-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; font-family: 'Montserrat', sans-serif; flex-shrink: 0; }
+.doc-status-icon.submitted { background: rgba(6,214,160,.15); color: var(--green); }
+.doc-status-icon.pending   { background: rgba(255,199,0,.15);  color: var(--gold); }
+.doc-info { flex: 1; }
+.doc-name { font-size: 13px; font-weight: 600; }
+.doc-date { font-size: 11px; color: var(--gray); margin-top: 3px; }
+
+
+/* ── DISCIPLINARY RECORD ── */
+.disc-status-card { margin: 0 20px 16px; border-radius: 20px; padding: 28px 20px; text-align: center; }
+.disc-status-card.clean   { background: rgba(6,214,160,.08);  border: 1px solid rgba(6,214,160,.2); }
+.disc-status-card.flagged { background: rgba(239,71,111,.08); border: 1px solid rgba(239,71,111,.2); }
+.disc-status-icon  { font-size: 40px; margin-bottom: 10px; }
+.disc-status-title { font-size: 18px; font-weight: 700; font-family: 'Montserrat', sans-serif; margin-bottom: 6px; }
+.disc-status-sub   { font-size: 13px; color: var(--gray); }
+.disc-info-note { margin: 0 20px 16px; background: rgba(255,255,255,.04); border-radius: 12px; padding: 12px 14px; display: flex; gap: 10px; font-size: 12px; color: var(--gray); line-height: 1.5; }
+.disc-info-note span { font-size: 16px; flex-shrink: 0; }
+.disc-list { padding: 0 20px; display: flex; flex-direction: column; gap: 10px; }
+.disc-empty { text-align: center; padding: 24px; color: var(--gray); font-size: 13px; }
+.disc-card { background: var(--card); border-radius: 14px; padding: 14px 16px; border: 1px solid rgba(239,71,111,.15); }
+.disc-date   { font-size: 10px; color: var(--gray); font-family: 'Roboto Mono', monospace; margin-bottom: 4px; }
+.disc-type   { font-size: 13px; font-weight: 700; font-family: 'Montserrat', sans-serif; }
+.disc-action { font-size: 11px; color: var(--gold); margin-top: 4px; }
+
+
+/* ── EDIT PERSONAL INFO MODAL ── */
+.edit-modal { position: fixed; inset: 0; z-index: 200; display: flex; align-items: flex-end; justify-content: center; animation: fadeIn .2s ease; }
+.edit-modal-bg  { position: absolute; inset: 0; background: rgba(0,0,0,.7); backdrop-filter: blur(6px); }
+.edit-modal-box { position: relative; width: 100%; max-width: 430px; background: var(--card2); border-radius: 24px 24px 0 0; padding: 24px 20px 36px; border-top: 1px solid rgba(0,194,250,.2); box-shadow: 0 -8px 40px rgba(0,0,0,.5); }
+.edit-modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.edit-modal-header h3 { font-size: 18px; font-weight: 700; font-family: 'Montserrat', sans-serif; }
+.edit-modal-close { background: rgba(255,255,255,.08); border: none; border-radius: 50%; width: 32px; height: 32px; color: var(--white); font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.edit-locked-row { background: rgba(255,255,255,.04); border-radius: 12px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.edit-locked-info { flex: 1; }
+.edit-locked-label { font-size: 10px; color: var(--gray); font-weight: 600; letter-spacing: .5px; text-transform: uppercase; }
+.edit-locked-val   { font-size: 13px; font-weight: 600; margin-top: 3px; }
+.edit-modal-actions { display: flex; gap: 10px; margin-top: 20px; }
+.edit-cancel-btn { flex: 1; padding: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius-sm); color: var(--gray-light); font-size: 15px; font-weight: 700; font-family: 'Montserrat', sans-serif; cursor: pointer; }
+.edit-success { background: rgba(6,214,160,.1); border: 1px solid rgba(6,214,160,.2); border-radius: 10px; padding: 10px 14px; font-size: 13px; color: var(--green); text-align: center; margin-top: 12px; }

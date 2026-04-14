@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>YPC Student</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+<div class="phone-wrap">
+
+  <!-- ══════════════════════════════════════════
+       LOGIN
+  ══════════════════════════════════════════════ -->
+  <div class="screen active" id="login">
+    <div class="login-bg-circle c1"></div>
+    <div class="login-bg-circle c2"></div>
+    <div class="login-logo">
+      <div class="logo-badge">YPC</div>
+      <h1>YPC International College</h1>
+      <p>Student Portal</p>
+    </div>
+
+    <!-- Login mode toggle -->
+    <div class="login-mode-toggle">
+      <button class="login-mode-btn active" id="btnModeStudent" onclick="setLoginMode('student')">Student</button>
+      <button class="login-mode-btn" id="btnModeAdmin" onclick="setLoginMode('admin')">Admin</button>
+    </div>
+
+    <!-- Student login -->
+    <div class="login-card" id="studentLoginCard">
+      <h2>Welcome back 👋</h2>
+      <p>Sign in to your student account</p>
+      <div class="input-group">
+        <label>STUDENT ID</label>
+        <input type="text" id="loginId" placeholder="e.g. 23BIS12345" value="23BIS12345">
+      </div>
+      <div class="input-group">
+        <label>PASSWORD</label>
+        <input type="password" id="loginPass" placeholder="Enter your password" value="password123">
+      </div>
+      <div id="loginError" style="color:var(--red);font-size:13px;margin-bottom:8px;display:none"></div>
+      <button class="btn-primary" onclick="doLogin()">Sign In →</button>
+    </div>
+
+    <!-- Admin login -->
+    <div class="login-card" id="adminLoginCard" style="display:none">
+      <h2>Admin Portal</h2>
+      <p>Restricted — authorised staff only</p>
+      <div class="input-group">
+        <label>ADMIN USERNAME</label>
+        <input type="text" id="adminUser" placeholder="Enter admin username" value="admin">
+      </div>
+      <div class="input-group">
+        <label>PASSWORD</label>
+        <input type="password" id="adminPass" placeholder="Enter admin password" value="admin123">
+      </div>
+      <div id="adminLoginError" style="color:var(--red);font-size:13px;margin-bottom:8px;display:none"></div>
+      <button class="btn-primary" onclick="doAdminLogin()">Admin Sign In →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       DASHBOARD
+  ══════════════════════════════════════════════ -->
+  <div class="screen" id="dashboard">
+    <div class="status-bar"><span class="js-clock">9:57 PM</span><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-header">
+      <div style="width:36px"></div>
+      <div style="text-align:center;font-size:13px;font-weight:700;color:var(--gray)">YPC STUDENT</div>
+      <div class="notif-btn">🔔<div class="notif-dot"></div></div>
+    </div>
+    <div class="dash-scroll">
+      <div class="greeting-section">
+        <div class="sub" id="dashGreetSub">Good Evening</div>
+        <h1 id="dashGreetName">Maxwell Ng<br>Yi Ken 👋</h1>
+        <div class="date">Friday, 6 March 2026 · Sem Jan–Apr 2026</div>
+      </div>
+
+      <div class="id-card">
+        <div class="id-card-top">
+          <div class="avatar" id="dashAvatar">M</div>
+          <div class="id-info">
+            <div class="name" id="dashName">Maxwell Ng Yi Ken</div>
+            <div class="id" id="dashYpcId">ID: 23BIS12345</div>
+            <div class="prog" id="dashProg">Diploma in Business Information Systems</div>
+          </div>
+        </div>
+        <div class="id-stats">
+          <div class="id-stat"><div class="val good" id="dashCgpa">3.65</div><div class="lbl">CGPA</div></div>
+          <div class="id-stat"><div class="val ok" id="dashAttend">87%</div><div class="lbl">Attendance</div></div>
+          <div class="id-stat"><div class="val" id="dashSem">Sem 4</div><div class="lbl">Progress</div></div>
+        </div>
+      </div>
+
+      <div class="section-title"><h3>Quick Access</h3></div>
+      <div class="quick-actions">
+        <div class="qa-item" onclick="goTo('attendance')"><div class="qa-icon" style="background:linear-gradient(135deg,#065f46,#059669)">📊</div><span>Attendance</span></div>
+        <div class="qa-item" onclick="goTo('results')"><div class="qa-icon" style="background:linear-gradient(135deg,#000B7F,#0063EB)">🏆</div><span>Results</span></div>
+        <div class="qa-item" onclick="goTo('exam-slip')"><div class="qa-icon" style="background:linear-gradient(135deg,#7c2d12,#ea580c)">📋</div><span>Exam Slip</span></div>
+        <div class="qa-item" onclick="goTo('payment')"><div class="qa-icon" style="background:linear-gradient(135deg,#064e3b,#10b981)">💳</div><span>Payments</span></div>
+      </div>
+
+      <div class="section-title"><h3>Today's Classes</h3><a onclick="goTo('schedule')">See all</a></div>
+      <div class="schedule-strip">
+        <div class="sched-card">
+          <div class="sched-time">08:00<br>10:00</div>
+          <div class="sched-dot" style="background:#06d6a0"></div>
+          <div class="sched-info"><div class="subj">Business Mathematics</div><div class="loc">Block A, Room 203</div></div>
+          <span class="sched-badge chip chip-green">Done</span>
+        </div>
+        <div class="sched-card" style="border-color:rgba(0,194,250,.25)">
+          <div class="sched-time">10:00<br>12:00</div>
+          <div class="sched-dot" style="background:#00C2FA"></div>
+          <div class="sched-info"><div class="subj">Database Systems</div><div class="loc">Lab 2, IT Block</div></div>
+          <span class="sched-badge chip chip-purple">Now</span>
+        </div>
+        <div class="sched-card">
+          <div class="sched-time">02:00<br>04:00</div>
+          <div class="sched-dot" style="background:#8892a4"></div>
+          <div class="sched-info"><div class="subj">Communication Skills</div><div class="loc">Block C, Room 105</div></div>
+          <span class="sched-badge chip chip-yellow">2h left</span>
+        </div>
+      </div>
+
+      <div class="section-title"><h3>Announcements</h3></div>
+      <div class="announcements">
+        <div class="ann-card"><div class="ann-tag">Evaluation</div><div class="ann-title">Online Evaluation for Foundation (Jan–Apr 2026)</div><div class="ann-meta">By HAMIZA YAZMIN · 02 Mar 2026</div></div>
+        <div class="ann-card"><div class="ann-tag">Results</div><div class="ann-title">Degree results and resit procedure for Sep–Dec 2025</div><div class="ann-meta">By HAMIZA YAZMIN · 27 Feb 2026</div></div>
+        <div class="ann-card"><div class="ann-tag">Transport</div><div class="ann-title">Bus schedule during Ramadhan 2026</div><div class="ann-meta">By HAMIZA YAZMIN · 23 Feb 2026</div></div>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <div class="nav-item active" onclick="goTo('dashboard')"><span class="ni">🏠</span><div class="nav-active-dot"></div><span class="nl" style="color:var(--cyan)">Home</span></div>
+      <div class="nav-item" onclick="goTo('attendance')"><span class="ni">📊</span><span class="nl">Attendance</span></div>
+      <div class="nav-item" onclick="goTo('results')"><span class="ni">🏆</span><span class="nl">Results</span></div>
+      <div class="nav-item" onclick="goTo('schedule')"><span class="ni">📅</span><span class="nl">Schedule</span></div>
+      <div class="nav-item" onclick="goTo('profile')"><span class="ni">👤</span><span class="nl">Profile</span></div>
+    </nav>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       ATTENDANCE
+  ══════════════════════════════════════════════ -->
+  <div class="screen" id="attendance">
+    <div class="status-bar"><span class="js-clock">9:57 PM</span><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-header"><div class="back-btn" onclick="goTo('dashboard')">←</div><h2>Attendance</h2><div style="width:36px"></div></div>
+    <div class="dash-scroll">
+      <div class="attend-summary">
+        <h3>Overall Attendance — Jan–Apr 2026</h3>
+        <div class="attend-ring-row">
+          <div class="ring-wrap">
+            <svg width="90" height="90" viewBox="0 0 90 90">
+              <circle cx="45" cy="45" r="38" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="8"/>
+              <circle id="attendRing" cx="45" cy="45" r="38" fill="none" stroke="url(#ringGrad)" stroke-width="8" stroke-dasharray="238.76" stroke-dashoffset="31" stroke-linecap="round"/>
+              <defs><linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0063EB"/><stop offset="100%" stop-color="#00C2FA"/></linearGradient></defs>
+            </svg>
+            <div class="ring-center"><div class="pct" id="attendPct" style="color:#00C2FA">87%</div><div class="lbl">Overall</div></div>
+          </div>
+          <div class="attend-detail">
+            <div class="att-row"><span class="ar-lbl">Total Classes</span><span class="ar-val" id="attendTotal">156</span></div>
+            <div class="att-row"><span class="ar-lbl">Attended</span><span class="ar-val" id="attendAttended" style="color:var(--green)">136</span></div>
+            <div class="att-row"><span class="ar-lbl">Absent</span><span class="ar-val" id="attendAbsent" style="color:var(--red)">20</span></div>
+            <div class="att-row"><span class="ar-lbl">Min. Required</span><span class="ar-val" style="color:var(--gold)">80%</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="section-title"><h3>By Subject</h3></div>
+      <div class="subject-attend" id="subjectAttend">
+        <div class="sa-card"><div class="sa-top"><span class="sa-subj">Database Systems</span><span class="sa-pct" style="color:#06d6a0">92%</span></div><div class="sa-bar"><div class="sa-fill" style="width:92%;background:linear-gradient(90deg,#059669,#06d6a0)"></div></div><div class="sa-foot"><span>23/25 classes</span><span class="chip chip-green">Safe</span></div></div>
+        <div class="sa-card"><div class="sa-top"><span class="sa-subj">Business Mathematics</span><span class="sa-pct" style="color:#06d6a0">88%</span></div><div class="sa-bar"><div class="sa-fill" style="width:88%;background:linear-gradient(90deg,#059669,#06d6a0)"></div></div><div class="sa-foot"><span>22/25 classes</span><span class="chip chip-green">Safe</span></div></div>
+        <div class="sa-card"><div class="sa-top"><span class="sa-subj">Communication Skills</span><span class="sa-pct" style="color:var(--gold)">84%</span></div><div class="sa-bar"><div class="sa-fill" style="width:84%;background:linear-gradient(90deg,#b45309,#f4a100)"></div></div><div class="sa-foot"><span>21/25 classes</span><span class="chip chip-yellow">Watch</span></div></div>
+        <div class="sa-card"><div class="sa-top"><span class="sa-subj">Principles of Marketing</span><span class="sa-pct" style="color:var(--red)">76%</span></div><div class="sa-bar"><div class="sa-fill" style="width:76%;background:linear-gradient(90deg,#9f1239,#ef476f)"></div></div><div class="sa-foot"><span>19/25 classes</span><span class="chip chip-red">At Risk</span></div></div>
+        <div class="sa-card"><div class="sa-top"><span class="sa-subj">Introduction to Programming</span><span class="sa-pct" style="color:#06d6a0">96%</span></div><div class="sa-bar"><div class="sa-fill" style="width:96%;background:linear-gradient(90deg,#059669,#06d6a0)"></div></div><div class="sa-foot"><span>24/25 classes</span><span class="chip chip-green">Safe</span></div></div>
+      </div>
+      <div style="height:20px"></div>
+    </div>
+    <nav class="bottom-nav">
+      <div class="nav-item" onclick="goTo('dashboard')"><span class="ni">🏠</span><span class="nl">Home</span></div>
+      <div class="nav-item active" onclick="goTo('attendance')"><span class="ni">📊</span><div class="nav-active-dot"></div><span class="nl" style="color:var(--cyan)">Attendance</span></div>
+      <div class="nav-item" onclick="goTo('results')"><span class="ni">🏆</span><span class="nl">Results</span></div>
+      <div class="nav-item" onclick="goTo('schedule')"><span class="ni">📅</span><span class="nl">Schedule</span></div>
+      <div class="nav-item" onclick="goTo('profile')"><span class="ni">👤</span><span class="nl">Profile</span></div>
+    </nav>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       RESULTS
+  ══════════════════════════════════════════════ -->
+  <div class="screen" id="results">
+    <div class="status-bar"><span class="js-clock">9:57 PM</span><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-header"><div class="back-btn" onclick="goTo('dashboard')">←</div><h2>Exam Results</h2><div style="width:36px"></div></div>
+    <div class="dash-scroll">
+      <div class="gpa-card">
+        <div class="gpa-lbl">Cumulative GPA</div>
+        <div class="gpa-val" id="resultsCgpa">3.65</div>
+        <div class="gpa-sub">Dean's List Eligible 🏅</div>
+        <div class="gpa-sem">Semester 4 · Jan–Apr 2026</div>
+      </div>
+      <div class="section-title"><h3>Current Semester</h3></div>
+      <div class="result-list" id="resultList">
+        <div class="res-card"><div class="grade-badge" style="background:rgba(6,214,160,.15);color:#06d6a0">A</div><div class="res-info"><div class="res-subj">Database Systems</div><div class="res-code">BIS2204</div></div><div class="res-score"><div class="score" style="color:#06d6a0">88</div><div class="credits">3 Credits</div></div></div>
+        <div class="res-card"><div class="grade-badge" style="background:rgba(6,214,160,.15);color:#06d6a0">A-</div><div class="res-info"><div class="res-subj">Introduction to Programming</div><div class="res-code">BIS2101</div></div><div class="res-score"><div class="score" style="color:#06d6a0">84</div><div class="credits">3 Credits</div></div></div>
+        <div class="res-card"><div class="grade-badge" style="background:rgba(244,161,0,.15);color:#f4a100">B+</div><div class="res-info"><div class="res-subj">Business Mathematics</div><div class="res-code">BIS2301</div></div><div class="res-score"><div class="score" style="color:#f4a100">76</div><div class="credits">3 Credits</div></div></div>
+        <div class="res-card"><div class="grade-badge" style="background:rgba(244,161,0,.15);color:#f4a100">B</div><div class="res-info"><div class="res-subj">Principles of Marketing</div><div class="res-code">BIS2401</div></div><div class="res-score"><div class="score" style="color:#f4a100">72</div><div class="credits">3 Credits</div></div></div>
+        <div class="res-card"><div class="grade-badge" style="background:rgba(6,147,227,.15);color:#0693e3">B-</div><div class="res-info"><div class="res-subj">Communication Skills</div><div class="res-code">MPU2313</div></div><div class="res-score"><div class="score" style="color:#0693e3">68</div><div class="credits">2 Credits</div></div></div>
+      </div>
+      <div style="height:20px"></div>
+    </div>
+    <nav class="bottom-nav">
+      <div class="nav-item" onclick="goTo('dashboard')"><span class="ni">🏠</span><span class="nl">Home</span></div>
+      <div class="nav-item" onclick="goTo('attendance')"><span class="ni">📊</span><span class="nl">Attendance</span></div>
+      <div class="nav-item active" onclick="goTo('results')"><span class="ni">🏆</span><div class="nav-active-dot"></div><span class="nl" style="color:var(--cyan)">Results</span></div>
+      <div class="nav-item" onclick="goTo('schedule')"><span class="ni">📅</span><span class="nl">Schedule</span></div>
+      <div class="nav-item" onclick="goTo('profile')"><span class="ni">👤</span><span class="nl">Profile</span></div>
+    </nav>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SCHEDULE
+  ══════════════════════════════════════════════ -->
+  <div class="screen" id="schedule">
+    <div class="status-bar"><span class="js-clock">9:57 PM</span><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-header"><div class="back-btn" onclick="goTo('dashboard')">←</div><h2>Class Schedule</h2><div style="width:36px"></div></div>
+    <div class="dash-scroll">
+      <div class="day-tabs">
+        <div class="day-tab" data-day="Mon">Mon</div>
+        <div class="day-tab" data-day="Tue">Tue</div>
+        <div class="day-tab" data-day="Wed">Wed</div>
+        <div class="day-tab" data-day="Thu">Thu</div>
+        <div class="day-tab active" data-day="Fri">Fri</div>
+        <div class="day-tab" data-day="Sat">Sat</div>
+      </div>
+      <div class="full-schedule" id="fullSchedule">
+        <div class="fs-card">
+          <div class="fs-time-col"><div class="fst">08:00</div><div class="fst">10:00</div></div>
+          <div class="fs-line" style="background:linear-gradient(to bottom,#06d6a0,transparent)"></div>
+          <div class="fs-body">
+            <div class="fs-subj">Business Mathematics</div>
+            <div class="fs-lec">Dr. Ahmad Fadzli</div>
+            <div class="fs-room">Block A · Room 203</div>
+          </div>
+          <div class="fs-type chip chip-green">Lecture</div>
+        </div>
+        <div class="fs-card" style="border-color:rgba(0,194,250,.2)">
+          <div class="fs-time-col"><div class="fst">10:00</div><div class="fst">12:00</div></div>
+          <div class="fs-line" style="background:linear-gradient(to bottom,#00C2FA,transparent)"></div>
+          <div class="fs-body">
+            <div class="fs-subj">Database Systems</div>
+            <div class="fs-lec">Ms. Nurul Ain</div>
+            <div class="fs-room">IT Block · Lab 2</div>
+          </div>
+          <div class="fs-type chip chip-purple">Lab</div>
+        </div>
+        <div class="fs-card">
+          <div class="fs-time-col"><div class="fst">14:00</div><div class="fst">16:00</div></div>
+          <div class="fs-line" style="background:linear-gradient(to bottom,#f4a100,transparent)"></div>
+          <div class="fs-body">
+            <div class="fs-subj">Communication Skills</div>
+            <div class="fs-lec">Pn. Siti Hajar</div>
+            <div class="fs-room">Block C · Room 105</div>
+          </div>
+          <div class="fs-type chip chip-yellow">Tutorial</div>
+        </div>
+      </div>
+      <div style="height:20px"></div>
+    </div>
+    <nav class="bottom-nav">
+      <div class="nav-item" onclick="goTo('dashboard')"><span class="ni">🏠</span><span class="nl">Home</span></div>
+      <div class="nav-item" onclick="goTo('attendance')"><span class="ni">📊</span><span class="nl">Attendance</span></div>
+      <div class="nav-item" onclick="goTo('results')"><span class="ni">🏆</span><span class="nl">Results</span></div>
+      <div class="nav-item active" onclick="goTo('schedule')"><span class="ni">📅</span><div class="nav-active-dot"></div><span class="nl" style="color:var(--cyan)">Schedule</span></div>
+      <div class="nav-item" onclick="goTo('profile')"><span class="ni">👤</span><span class="nl">Profile</span></div>
+    </nav>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       PROFILE  — Digital ID Card + new sections
+  ══════════════════════════════════════════════ -->
+  <div class="screen" id="profile">
+    <div class="status-bar"><span class="js-clock">9:57 PM</span><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-header"><div class="back-btn" onclick="goTo('dashboard')">←</div><h2>My Profile</h2><div style="width:36px"></div></div>
+
+    <div id="profile-scroll" style="overflow-y:auto;padding-bottom:90px;">
+
+      <!-- Digital ID Card -->
+      <div class="digital-id-card">
+        <div class="dic-header">
+          <div class="dic-college-badge">YPC</div>
+          <div>
+            <div class="dic-college-name">YPC International College</div>
+            <div class="dic-card-type">Student Identification Card</div>
+          </div>
+          <span class="chip chip-green" id="profileStatusChip" style="margin-left:auto;flex-shrink:0">Active</span>
+        </div>
+        <div class="dic-body">
+          <div class="dic-avatar" id="profileAvatar">M</div>
+          <div class="dic-details">
+            <div class="dic-name" id="profileName">Maxwell Ng Yi Ken</div>
+            <div class="dic-id-row">
+              <span class="dic-id-label">YPC ID</span>
+              <span class="dic-id-value" id="profileYpcId">23BIS12345</span>
+            </div>
+            <div class="dic-id-row">
+              <span class="dic-id-label">LJMU ID</span>
+              <span class="dic-id-value" id="profileLjmuId">LJMU-23-456789</span>
+            </div>
+            <div class="dic-id-row">
+              <span class="dic-id-label">Semester</span>
+              <span class="dic-id-value" id="profileSem" style="color:rgba(255,255,255,.9)">4 of 6</span>
+            </div>
+          </div>
+        </div>
+        <div class="dic-footer">
+          <div class="dic-programme" id="profileProg">Diploma in Business Information Systems</div>
+          <div class="dic-semester" id="profileIntake">Intake: Jan 2024 · Jan–Apr 2026</div>
+        </div>
+      </div>
+
+      <!-- Account Status Banner -->
+      <div class="acct-status-banner" onclick="goTo('payment')">
+        <div class="acct-status-icon" style="background:rgba(6,214,160,.15)">💳</div>
+        <div class="acct-status-info">
+          <div class="acct-status-label">Account Status</div>
+          <div class="acct-status-value" id="profileAcctStatus">All fees settled</div>
+        </div>
+        <span class="chip chip-green" id="profileAcctChip">Paid</span>
+      </div>
+
+      <!-- Academic Info (all locked — admin only) -->
+      <div class="info-section">
+        <div class="info-card">
+          <div class="info-card-head">
+            Academic Info
+            <span class="admin-only-badge">Admin only</span>
+          </div>
+          <div class="info-row">
+            <span class="ir-icon">🎓</span><span class="ir-lbl">Programme</span>
+            <div class="ir-right"><span class="ir-val">Diploma BIS</span><span class="lock-icon">🔒</span></div>
+          </div>
+          <div class="info-row">
+            <span class="ir-icon">📅</span><span class="ir-lbl">Intake</span>
+            <div class="ir-right"><span class="ir-val">Jan 2024</span><span class="lock-icon">🔒</span></div>
+          </div>
+          <div class="info-row">
+            <span class="ir-icon">📚</span><span class="ir-lbl">Semester</span>
+            <div class="ir-right"><span class="ir-val">4 of 6</span><span class="lock-icon">🔒</span></div>
+          </div>
+          <div class="info-row">
+            <span class="ir-icon">⭐</span><span class="ir-lbl">CGPA</span>
+            <div class="ir-right"><span class="ir-val" style="color:#06d6a0" id="profileCgpa">3.65</span><span class="lock-icon">🔒</span></div>
+          </div>
+          <div class="info-row">
+            <span class="ir-icon">📊</span><span class="ir-lbl">Status</span>
+            <div class="ir-right"><span class="chip chip-green">Active</span><span class="lock-icon">🔒</span></div>
+          </div>
+        </div>
+
+        <!-- Personal Info (phone + IC editable, email locked) -->
+        <div class="info-card">
+          <div class="info-card-head">
+            Personal Info
+            <button class="edit-info-btn" onclick="openEditModal()">Edit</button>
+          </div>
+          <div class="info-row">
+            <span class="ir-icon">📧</span><span class="ir-lbl">College Email</span>
+            <div class="ir-right">
+              <span class="ir-val" id="profileEmail" style="font-size:11px">maxwell@student.ypc.edu.my</span>
+              <span class="lock-icon" title="Managed by admin">🔒</span>
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="ir-icon">📱</span><span class="ir-lbl">Phone</span>
+            <span class="ir-val editable-val" id="profilePhone">+60 12-345 6789</span>
+          </div>
+          <div class="info-row">
+            <span class="ir-icon">🪪</span><span class="ir-lbl">IC No.</span>
+            <span class="ir-val editable-val" id="profileIc">050312-14-XXXX</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Menu -->
+      <div class="menu-list">
+        <div class="menu-item" onclick="goTo('exam-slip')">
+          <div class="menu-icon" style="background:rgba(0,194,250,.15)">📋</div>
+          <span class="menu-label">Exam Slips &amp; QR Code</span>
+          <span class="menu-arrow">›</span>
+        </div>
+        <div class="menu-item" onclick="goTo('payment')">
+          <div class="menu-icon" style="background:rgba(6,214,160,.15)">💳</div>
+          <span class="menu-label">Payment History</span>
+          <span class="menu-arrow">›</span>
+        </div>
+        <div class="menu-item" onclick="goTo('extracurricular')">
+          <div class="menu-icon" style="background:rgba(244,161,0,.15)">🏅</div>
+          <span class="menu-label">Extracurricular Activities</span>
+          <span class="menu-arrow">›</span>
+        </div>
+        <div class="menu-item" onclick="goTo('documents')">
+          <div class="menu-icon" style="background:rgba(6,147,227,.15)">📁</div>
+          <span class="menu-label">Document Checklist</span>
+          <span class="menu-arrow">›</span>
+        </div>
+        <div class="menu-item" onclick="goTo('disciplinary')">
+          <div class="menu-icon" style="background:rgba(239,71,111,.15)">⚖️</div>
+          <span class="menu-label">Disciplinary Record</span>
+          <span class="menu-arrow">›</span>
+        </div>
+        <div class="menu-item" onclick="alert('Change Password — Coming Soon')">
+          <div class="menu-icon" style="background:rgba(0,99,235,.15)">🔒</div>
+          <span class="menu-label">Change Password</span>
+          <span class="menu-arrow">›</span>
+        </div>
+      </div>
+
+      <button class="logout-btn" onclick="doLogout()">Sign Out</button>
+    </div>
+
+    <nav class="bottom-nav">
+      <div class="nav-item" onclick="goTo('dashboard')"><span class="ni">🏠</span><span class="nl">Home</span></div>
+      <div class="nav-item" onclick="goTo('attendance')"><span class="ni">📊</span><span class="nl">Attendance</span></div>
+      <div class="nav-item" onclick="goTo('results')"><span class="ni">🏆</span><span class="nl">Results</span></div>
+      <div class="nav-item" onclick="goTo('schedule')"><span class="ni">📅</span><span class="nl">Schedule</span></div>
+      <div class="nav-item active" onclick="goTo('profile')"><span class="ni">👤</span><div class="nav-active-dot"></div><span class="nl" style="color:var(--cyan)">Profile</span></div>
+    </nav>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       EXAM SLIP
+  ══════════════════════════════════════════════ -->
+  <div class="screen" id="exam-slip">
+    <div class="status-bar"><span class="js-clock">9:57 PM</span><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-header"><div class="back-btn" onclick="goTo('profile')">←</div><h2>Exam Slips</h2><div style="width:36px"></div></div>
+    <div class="dash-scroll">
+      <div class="slip-intro">
+        <span>📋</span>
+        <p>Present the QR code to your lecturer at the exam hall entrance. Your student IDs will be verified.</p>
+      </div>
+      <div class="section-title"><h3>Jan–Apr 2026 Final Exams</h3></div>
+      <div class="exam-slip-list" id="examSlipList">
+        <div class="slip-loading">Loading exam slips…</div>
+      </div>
+      <div style="height:20px"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       PAYMENT
+  ══════════════════════════════════════════════ -->
+  <div class="screen" id="payment">
+    <div class="status-bar"><span class="js-clock">9:57 PM</span><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-header"><div class="back-btn" onclick="goTo('profile')">←</div><h2>Account &amp; Payments</h2><div style="width:36px"></div></div>
+    <div class="dash-scroll">
+      <div class="payment-overview">
+        <div class="po-status-text" id="poLabel">Outstanding Balance</div>
+        <div class="po-amount good" id="poAmount">RM 0.00</div>
+        <span class="chip chip-green" id="poChip">All Settled</span>
+      </div>
+      <div class="section-title"><h3>Payment History</h3></div>
+      <div class="payment-list" id="paymentList">
+        <div class="slip-loading">Loading payment records…</div>
+      </div>
+      <div style="height:20px"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       EXTRACURRICULAR ACTIVITIES  (new)
+  ══════════════════════════════════════════════ -->
+  <div class="screen" id="extracurricular">
+    <div class="status-bar"><span class="js-clock">9:57 PM</span><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-header"><div class="back-btn" onclick="goTo('profile')">←</div><h2>Extracurricular</h2><div style="width:36px"></div></div>
+    <div class="dash-scroll">
+      <div class="extra-stats-row">
+        <div class="extra-stat"><div class="extra-stat-val" id="extraCount">3</div><div class="extra-stat-lbl">Activities</div></div>
+        <div class="extra-stat-divider"></div>
+        <div class="extra-stat"><div class="extra-stat-val" id="leaderCount">2</div><div class="extra-stat-lbl">Leadership Roles</div></div>
+        <div class="extra-stat-divider"></div>
+        <div class="extra-stat"><div class="extra-stat-val" id="awardCount">1</div><div class="extra-stat-lbl">Awards</div></div>
+      </div>
+      <div class="section-title"><h3>Current Activities</h3></div>
+      <div class="activity-list" id="activityList">
+        <div class="activity-card">
+          <div class="activity-icon" style="background:rgba(0,194,250,.15)">💻</div>
+          <div class="activity-info">
+            <div class="activity-name">Programming Club</div>
+            <div class="activity-role">Secretary</div>
+            <div class="activity-period">Jan 2025 – Present</div>
+          </div>
+          <span class="chip chip-green">Active</span>
+        </div>
+        <div class="activity-card">
+          <div class="activity-icon" style="background:rgba(6,214,160,.15)">♻️</div>
+          <div class="activity-info">
+            <div class="activity-name">Green Campus Club</div>
+            <div class="activity-role">Member</div>
+            <div class="activity-period">Sep 2024 – Present</div>
+          </div>
+          <span class="chip chip-green">Active</span>
+        </div>
+        <div class="activity-card">
+          <div class="activity-icon" style="background:rgba(244,161,0,.15)">📢</div>
+          <div class="activity-info">
+            <div class="activity-name">Student Council</div>
+            <div class="activity-role">Publicity Head</div>
+            <div class="activity-period">Jan 2026 – Present</div>
+          </div>
+          <span class="chip chip-green">Active</span>
+        </div>
+      </div>
+      <div class="section-title" style="margin-top:8px"><h3>Awards &amp; Recognition</h3></div>
+      <div class="activity-list" id="awardList">
+        <div class="activity-card">
+          <div class="activity-icon" style="background:rgba(244,161,0,.15)">🥇</div>
+          <div class="activity-info">
+            <div class="activity-name">Best Project Award</div>
+            <div class="activity-role">YPC Annual Tech Showcase 2025</div>
+            <div class="activity-period">Nov 2025</div>
+          </div>
+          <span class="chip chip-yellow">Award</span>
+        </div>
+      </div>
+      <div style="height:20px"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       DOCUMENT CHECKLIST  (new)
+  ══════════════════════════════════════════════ -->
+  <div class="screen" id="documents">
+    <div class="status-bar"><span class="js-clock">9:57 PM</span><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-header"><div class="back-btn" onclick="goTo('profile')">←</div><h2>Document Checklist</h2><div style="width:36px"></div></div>
+    <div class="dash-scroll">
+      <div class="doc-progress-card">
+        <div class="doc-progress-label">Submission Progress</div>
+        <div class="doc-progress-bar-wrap">
+          <div class="doc-progress-bar" id="docProgressBar" style="width:78%"></div>
+        </div>
+        <div class="doc-progress-count"><span id="docSubmitted">7</span> of <span id="docTotal">9</span> documents submitted</div>
+      </div>
+      <div class="section-title"><h3>Required Documents</h3></div>
+      <div class="doc-list" id="docList">
+        <div class="doc-item"><div class="doc-status-icon submitted">✓</div><div class="doc-info"><div class="doc-name">IC Copy (Front &amp; Back)</div><div class="doc-date">Submitted: 15 Jan 2024</div></div><span class="chip chip-green">Submitted</span></div>
+        <div class="doc-item"><div class="doc-status-icon submitted">✓</div><div class="doc-info"><div class="doc-name">SPM / O-Level Certificate</div><div class="doc-date">Submitted: 15 Jan 2024</div></div><span class="chip chip-green">Submitted</span></div>
+        <div class="doc-item"><div class="doc-status-icon submitted">✓</div><div class="doc-info"><div class="doc-name">Trial Examination Result</div><div class="doc-date">Submitted: 15 Jan 2024</div></div><span class="chip chip-green">Submitted</span></div>
+        <div class="doc-item"><div class="doc-status-icon submitted">✓</div><div class="doc-info"><div class="doc-name">Offer Letter (YPC)</div><div class="doc-date">Submitted: 10 Jan 2024</div></div><span class="chip chip-green">Submitted</span></div>
+        <div class="doc-item"><div class="doc-status-icon submitted">✓</div><div class="doc-info"><div class="doc-name">Passport Photo (2 copies)</div><div class="doc-date">Submitted: 15 Jan 2024</div></div><span class="chip chip-green">Submitted</span></div>
+        <div class="doc-item"><div class="doc-status-icon submitted">✓</div><div class="doc-info"><div class="doc-name">Medical Report</div><div class="doc-date">Submitted: 20 Jan 2024</div></div><span class="chip chip-green">Submitted</span></div>
+        <div class="doc-item"><div class="doc-status-icon submitted">✓</div><div class="doc-info"><div class="doc-name">Fee Payment Receipt (Sem 1)</div><div class="doc-date">Submitted: 15 Jan 2024</div></div><span class="chip chip-green">Submitted</span></div>
+        <div class="doc-item"><div class="doc-status-icon pending">!</div><div class="doc-info"><div class="doc-name">Co-Curriculum Record Form</div><div class="doc-date">Due: 30 Apr 2026</div></div><span class="chip chip-yellow">Pending</span></div>
+        <div class="doc-item"><div class="doc-status-icon pending">!</div><div class="doc-info"><div class="doc-name">LJMU Registration Confirmation</div><div class="doc-date">Due: 15 May 2026</div></div><span class="chip chip-yellow">Pending</span></div>
+      </div>
+      <div style="height:20px"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       DISCIPLINARY RECORD  (new)
+  ══════════════════════════════════════════════ -->
+  <div class="screen" id="disciplinary">
+    <div class="status-bar"><span class="js-clock">9:57 PM</span><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-header"><div class="back-btn" onclick="goTo('profile')">←</div><h2>Disciplinary Record</h2><div style="width:36px"></div></div>
+    <div class="dash-scroll">
+      <div class="disc-status-card clean" id="discStatusCard">
+        <div class="disc-status-icon">✅</div>
+        <div class="disc-status-title">Clean Record</div>
+        <div class="disc-status-sub">No disciplinary actions on file.</div>
+      </div>
+      <div class="disc-info-note">
+        <span>ℹ️</span>
+        <p>Disciplinary records are managed by the College Disciplinary Committee. Contact the Student Affairs office for any queries.</p>
+      </div>
+      <div class="section-title" style="margin-top:8px"><h3>Record History</h3></div>
+      <div class="disc-list" id="discList">
+        <div class="disc-empty">No records to display.</div>
+      </div>
+      <div style="height:20px"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       ADMIN DASHBOARD
+  ══════════════════════════════════════════════ -->
+  <div class="screen" id="admin-dashboard">
+    <div class="status-bar"><span class="js-clock">9:57 PM</span><div class="status-icons"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-header">
+      <div style="width:36px"></div>
+      <div style="text-align:center;font-size:13px;font-weight:700;color:var(--gold)">ADMIN PANEL</div>
+      <div style="width:36px"></div>
+    </div>
+    <div class="dash-scroll">
+
+      <!-- Admin identity card -->
+      <div class="admin-identity-card">
+        <div class="admin-shield">🛡️</div>
+        <div class="admin-id-info">
+          <div class="admin-id-name" id="adminDisplayName">Administrator</div>
+          <div class="admin-id-role" id="adminDisplayRole">System Administrator</div>
+        </div>
+        <span class="chip chip-yellow">Admin</span>
+      </div>
+
+      <!-- Student search -->
+      <div class="admin-search-section">
+        <div class="admin-search-label">Search Student</div>
+        <div class="admin-search-row">
+          <input class="admin-search-input" id="adminSearchInput" type="text" placeholder="Enter YPC ID (e.g. 23BIS12345)">
+          <button class="admin-search-btn" onclick="adminSearchStudent()">Search</button>
+        </div>
+        <div id="adminSearchError" style="color:var(--red);font-size:12px;margin-top:6px;display:none"></div>
+      </div>
+
+      <!-- Student result card (hidden until search) -->
+      <div id="adminStudentResult" style="display:none">
+        <div class="section-title"><h3>Student Record</h3></div>
+        <div class="admin-student-card">
+          <div class="admin-student-header">
+            <div class="admin-student-avatar" id="adminStuAvatar">M</div>
+            <div class="admin-student-info">
+              <div class="admin-student-name" id="adminStuName">—</div>
+              <div class="admin-student-id" id="adminStuYpcId">—</div>
+              <div class="admin-student-prog" id="adminStuProg">—</div>
+            </div>
+          </div>
+
+          <!-- Editable admin fields -->
+          <div class="admin-fields">
+            <div class="admin-field-row">
+              <label class="admin-field-label">YPC Student ID</label>
+              <input class="admin-field-input" id="adminEditYpcId" type="text" placeholder="23BIS12345">
+            </div>
+            <div class="admin-field-row">
+              <label class="admin-field-label">LJMU Student ID</label>
+              <input class="admin-field-input" id="adminEditLjmuId" type="text" placeholder="LJMU-23-XXXXXX">
+            </div>
+            <div class="admin-field-row">
+              <label class="admin-field-label">Full Name</label>
+              <input class="admin-field-input" id="adminEditName" type="text" placeholder="Full Name">
+            </div>
+            <div class="admin-field-row">
+              <label class="admin-field-label">College Email</label>
+              <input class="admin-field-input" id="adminEditEmail" type="email" placeholder="student@student.ypc.edu.my">
+            </div>
+            <div class="admin-field-row">
+              <label class="admin-field-label">Programme</label>
+              <input class="admin-field-input" id="adminEditProg" type="text" placeholder="Diploma in ...">
+            </div>
+            <div class="admin-field-row">
+              <label class="admin-field-label">Semester</label>
+              <input class="admin-field-input" id="adminEditSem" type="number" min="1" max="8" placeholder="1–8">
+            </div>
+            <div class="admin-field-row">
+              <label class="admin-field-label">CGPA</label>
+              <input class="admin-field-input" id="adminEditCgpa" type="number" step="0.01" min="0" max="4" placeholder="0.00–4.00">
+            </div>
+            <div class="admin-field-row">
+              <label class="admin-field-label">Account Status</label>
+              <select class="admin-field-input" id="adminEditStatus">
+                <option value="active">Active</option>
+                <option value="suspended">Suspended</option>
+                <option value="graduated">Graduated</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="adminSaveSuccess" class="edit-success" style="display:none">Student record updated successfully!</div>
+          <div class="admin-actions">
+            <button class="admin-save-btn" onclick="adminSaveStudent()">Save Changes</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="height:20px"></div>
+    </div>
+
+    <div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(10,22,40,.95);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.08);padding:14px 20px 28px;z-index:100">
+      <button class="logout-btn" onclick="doAdminLogout()">Admin Sign Out</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       EDIT PERSONAL INFO MODAL
+  ══════════════════════════════════════════════ -->
+  <div class="edit-modal" id="editModal" style="display:none">
+    <div class="edit-modal-bg" onclick="closeEditModal()"></div>
+    <div class="edit-modal-box">
+      <div class="edit-modal-header">
+        <h3>Edit Personal Info</h3>
+        <button class="edit-modal-close" onclick="closeEditModal()">✕</button>
+      </div>
+
+      <!-- Locked field (read-only) -->
+      <div class="edit-locked-row">
+        <span class="lock-icon">🔒</span>
+        <div class="edit-locked-info">
+          <div class="edit-locked-label">College Email</div>
+          <div class="edit-locked-val" id="editEmailDisplay">maxwell@student.ypc.edu.my</div>
+        </div>
+        <span style="font-size:10px;color:var(--gray)">Admin only</span>
+      </div>
+
+      <div class="input-group" style="margin-top:16px">
+        <label>PHONE NUMBER</label>
+        <input type="tel" id="editPhone" placeholder="+60 12-345 6789">
+      </div>
+      <div class="input-group">
+        <label>IC NUMBER</label>
+        <input type="text" id="editIc" placeholder="XXXXXX-XX-XXXX">
+      </div>
+      <div id="editSuccess" class="edit-success" style="display:none">Changes saved successfully!</div>
+      <div class="edit-modal-actions">
+        <button class="edit-cancel-btn" onclick="closeEditModal()">Cancel</button>
+        <button class="btn-primary" style="margin-top:0;flex:1" onclick="savePersonalInfo()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end phone-wrap -->
+<script src="js/app.js"></script>
+</body>
+</html>
